@@ -1,6 +1,6 @@
 # Go Backend Clean Architecture
 
-A Go (Golang) Backend Clean Architecture project with Gin, MongoDB, JWT Authentication Middleware, Test, and Docker.
+A Go (Golang) Backend Clean Architecture project with Gin, PostgreSQL, JWT Authentication Middleware, Test, and Docker.
 
 ![Go Backend Clean Architecture](https://github.com/amitshekhariitbhu/go-backend-clean-architecture/blob/main/assets/go-backend-clean-architecture.png?raw=true)
 
@@ -74,7 +74,7 @@ Prepare for Machine Learning Interview: [Machine Learning Interview Questions](h
 ## Major Packages used in this project
 
 - **gin**: Gin is an HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance -- up to 40 times faster. If you need a smashing performance, get yourself some Gin.
-- **mongo go driver**: The Official Golang driver for MongoDB.
+- **pq**: The PostgreSQL driver for Go.
 - **jwt**: JSON Web Tokens are an open, industry-standard RFC 7519 method for representing claims securely between two parties. Used for Access Token and Refresh Token.
 - **viper**: For loading configuration from the `.env` file. Go configuration with fangs. Find, load, and unmarshal a configuration file in JSON, TOML, YAML, HCL, INI, envfile, or Java properties formats.
 - **bcrypt**: Package bcrypt implements Provos and Mazières's bcrypt adaptive hashing algorithm.
@@ -113,8 +113,8 @@ cd go-backend-clean-architecture
 
 - Create a file `.env` similar to `.env.example` at the root directory with your configuration.
 - Install `go` if not installed on your machine.
-- Install `MongoDB` if not installed on your machine.
-- Important: Change the `DB_HOST` to `localhost` (`DB_HOST=localhost`) in `.env` configuration file. `DB_HOST=mongodb` is needed only when you run with Docker.
+- Install `PostgreSQL` if not installed on your machine.
+- Important: Change the `DB_HOST` to `localhost` (`DB_HOST=localhost`) in `.env` configuration file. `DB_HOST=postgres` is needed only when you run with Docker.
 - Run `go run cmd/main.go`.
 - Access API using `http://localhost:8080`
 

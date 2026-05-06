@@ -2,8 +2,6 @@ package domain
 
 import (
 	"context"
-
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 const (
@@ -11,10 +9,11 @@ const (
 )
 
 type User struct {
-	ID       primitive.ObjectID `bson:"_id"`
-	Name     string             `bson:"name"`
-	Email    string             `bson:"email"`
-	Password string             `bson:"password"`
+	ID       string `json:"id,omitempty"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"-"`
+	Role     string `json:"role"`
 }
 
 type UserRepository interface {
@@ -22,4 +21,5 @@ type UserRepository interface {
 	Fetch(c context.Context) ([]User, error)
 	GetByEmail(c context.Context, email string) (User, error)
 	GetByID(c context.Context, id string) (User, error)
+	Update(c context.Context, id string, user *User) error
 }

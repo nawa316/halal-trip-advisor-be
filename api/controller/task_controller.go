@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/amitshekhariitbhu/go-backend-clean-architecture/domain"
+	"github.com/amitshekhariitbhu/go-backend-clean-architecture/internal/idutil"
 	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type TaskController struct {
@@ -22,13 +22,8 @@ func (tc *TaskController) Create(c *gin.Context) {
 	}
 
 	userID := c.GetString("x-user-id")
-	task.ID = primitive.NewObjectID()
-
-	task.UserID, err = primitive.ObjectIDFromHex(userID)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, domain.ErrorResponse{Message: err.Error()})
-		return
-	}
+	task.ID = idutil.NewID()
+	task.UserID = userID
 
 	err = tc.TaskUsecase.Create(c, &task)
 	if err != nil {

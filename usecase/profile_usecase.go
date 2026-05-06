@@ -30,3 +30,9 @@ func (pu *profileUsecase) GetProfileByID(c context.Context, userID string) (*dom
 
 	return &domain.Profile{Name: user.Name, Email: user.Email}, nil
 }
+
+func (pu *profileUsecase) UpdateProfile(c context.Context, userID string, user *domain.User) error {
+	ctx, cancel := context.WithTimeout(c, pu.contextTimeout)
+	defer cancel()
+	return pu.userRepository.Update(ctx, userID, user)
+}

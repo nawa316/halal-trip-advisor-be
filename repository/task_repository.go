@@ -2,52 +2,49 @@ package repository
 
 import (
 	"context"
+	"database/sql"
 
 	"github.com/amitshekhariitbhu/go-backend-clean-architecture/domain"
-	"github.com/amitshekhariitbhu/go-backend-clean-architecture/mongo"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type taskRepository struct {
-	database   mongo.Database
-	collection string
+	db *sql.DB
 }
 
-func NewTaskRepository(db mongo.Database, collection string) domain.TaskRepository {
-	return &taskRepository{
-		database:   db,
-		collection: collection,
-	}
+func NewTaskRepository(db *sql.DB) domain.TaskRepository {
+	return &taskRepository{db: db}
 }
 
 func (tr *taskRepository) Create(c context.Context, task *domain.Task) error {
-	collection := tr.database.Collection(tr.collection)
-
-	_, err := collection.InsertOne(c, task)
+	_, err := tr.db.ExecContext(c,
+		`INSERT INTO tasks (id, title, user_id) VALUES ($1, $2, $3)`,
+		task.ID,
+		task.Title,
+		task.UserID,
+	)
 
 	return err
 }
 
 func (tr *taskRepository) FetchByUserID(c context.Context, userID string) ([]domain.Task, error) {
-	collection := tr.database.Collection(tr.collection)
-
-	var tasks []domain.Task
-
-	idHex, err := primitive.ObjectIDFromHex(userID)
-	if err != nil {
-		return tasks, err
-	}
-
-	cursor, err := collection.Find(c, bson.M{"userID": idHex})
+	rows, err := tr.db.QueryContext(c, `SELECT id, title, user_id FROM tasks WHERE user_id = $1 ORDER BY created_at DESC`, userID)
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
 
-	err = cursor.All(c, &tasks)
-	if tasks == nil {
-		return []domain.Task{}, err
+	tasks := make([]domain.Task, 0)
+	for rows.Next() {
+		var task domain.Task
+		if err := rows.Scan(&task.ID, &task.Title, &task.UserID); err != nil {
+			return nil, err
+		}
+		tasks = append(tasks, task)
 	}
 
-	return tasks, err
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return tasks, nil
 }

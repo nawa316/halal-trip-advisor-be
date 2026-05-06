@@ -12,20 +12,21 @@ services:
     ports:
       - "$PORT:$PORT"
     depends_on:
-      - mongodb
+      - postgres
 
-  mongodb:
-    image: mongo:6.0
-    container_name: mongodb
+  postgres:
+    image: postgres:16
+    container_name: postgres
     restart: unless-stopped
     env_file: .env
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=$DB_USER
-      - MONGO_INITDB_ROOT_PASSWORD=$DB_PASS
+      - POSTGRES_DB=$DB_NAME
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_PASSWORD=$DB_PASS
     ports:
       - "$DB_PORT:$DB_PORT"
     volumes:
-      - dbdata:/data/db
+      - pgdata:/var/lib/postgresql/data
 
 volumes:
-  dbdata:
+  pgdata:

@@ -13,7 +13,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func setUserID(userID string) gin.HandlerFunc {
@@ -31,8 +30,7 @@ func TestFetch(t *testing.T) {
 			Email: "test@gmail.com",
 		}
 
-		userObjectID := primitive.NewObjectID()
-		userID := userObjectID.Hex()
+		userID := "user-1"
 
 		mockProfileUsecase := new(mocks.ProfileUsecase)
 
@@ -65,8 +63,7 @@ func TestFetch(t *testing.T) {
 	})
 
 	t.Run("error", func(t *testing.T) {
-		userObjectID := primitive.NewObjectID()
-		userID := userObjectID.Hex()
+		userID := "user-2"
 
 		mockProfileUsecase := new(mocks.ProfileUsecase)
 

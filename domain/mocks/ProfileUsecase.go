@@ -37,6 +37,20 @@ func (_m *ProfileUsecase) GetProfileByID(c context.Context, userID string) (*dom
 	return r0, r1
 }
 
+// UpdateProfile provides a mock function with given fields: c, userID, user
+func (_m *ProfileUsecase) UpdateProfile(c context.Context, userID string, user *domain.User) error {
+	ret := _m.Called(c, userID, user)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string, *domain.User) error); ok {
+		r0 = rf(c, userID, user)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 type mockConstructorTestingTNewProfileUsecase interface {
 	mock.TestingT
 	Cleanup(func())

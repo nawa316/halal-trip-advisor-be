@@ -15,6 +15,7 @@ type Env struct {
 	DBUser                 string `mapstructure:"DB_USER"`
 	DBPass                 string `mapstructure:"DB_PASS"`
 	DBName                 string `mapstructure:"DB_NAME"`
+	DBSSLMode              string `mapstructure:"DB_SSLMODE"`
 	AccessTokenExpiryHour  int    `mapstructure:"ACCESS_TOKEN_EXPIRY_HOUR"`
 	RefreshTokenExpiryHour int    `mapstructure:"REFRESH_TOKEN_EXPIRY_HOUR"`
 	AccessTokenSecret      string `mapstructure:"ACCESS_TOKEN_SECRET"`

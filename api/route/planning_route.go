@@ -11,11 +11,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func NewRefreshTokenRouter(env *bootstrap.Env, timeout time.Duration, db *sql.DB, group *gin.RouterGroup) {
-	ur := repository.NewUserRepository(db)
-	rtc := &controller.RefreshTokenController{
-		RefreshTokenUsecase: usecase.NewRefreshTokenUsecase(ur, timeout),
-		Env:                 env,
+func NewPlanningRouter(env *bootstrap.Env, timeout time.Duration, db *sql.DB, group *gin.RouterGroup) {
+	pr := repository.NewPlaceRepository(db)
+	pc := &controller.PlanningController{
+		PlanningUsecase: usecase.NewPlanningUsecase(pr, timeout),
+		Env:             env,
 	}
-	group.POST("/refresh", rtc.RefreshToken)
+	group.POST("/generate", pc.Generate)
 }
