@@ -15,7 +15,9 @@ func NewPlanningRouter(env *bootstrap.Env, timeout time.Duration, db *sql.DB, gr
 	pr := repository.NewPlaceRepository(db)
 	pc := &controller.PlanningController{
 		PlanningUsecase: usecase.NewPlanningUsecase(pr, timeout),
+		PlaceRepository: pr,
 		Env:             env,
 	}
 	group.POST("/generate", pc.Generate)
+	group.GET("/alternatives", pc.GetAlternatives)
 }

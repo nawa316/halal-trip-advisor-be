@@ -10,6 +10,7 @@ import (
 
 type PlanningController struct {
 	PlanningUsecase domain.PlanningUsecase
+	PlaceRepository domain.PlaceRepository
 	Env             *bootstrap.Env
 }
 
@@ -33,4 +34,39 @@ func (pc *PlanningController) Generate(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, response)
+}
+
+func (pc *PlanningController) GetAlternatives(c *gin.Context) {
+	placeType := c.Query("type")
+	category := c.Query("category")
+
+	allPlaces, err := pc.PlaceRepository.Fetch(c)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, domain.ErrorResponse{Message: err.Error()})
+		return
+	}
+
+	alternatives := []domain.Place{}
+	for _, p := range allPlaces {
+		// If no filters provided, show all
+		if placeType == "" && category == "" {
+			alternatives = append(alternatives, p)
+			continue
+		}
+
+		// Match if either matches (OR logic)
+		match := false
+		if placeType != "" && p.Type == placeType {
+			match = true
+		}
+		if category != "" && p.Category == category {
+			match = true
+		}
+
+		if match {
+			alternatives = append(alternatives, p)
+		}
+	}
+
+	c.JSON(http.StatusOK, alternatives)
 }

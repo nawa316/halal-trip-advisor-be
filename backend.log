@@ -1,0 +1,52 @@
+2026/05/23 19:40:51 The App is running in development env
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /signup                   --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*SignupController).Signup-fm (4 handlers)
+[GIN-debug] POST   /login                    --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*LoginController).Login-fm (4 handlers)
+[GIN-debug] POST   /refresh                  --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*RefreshTokenController).RefreshToken-fm (4 handlers)
+[GIN-debug] POST   /generate                 --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*PlanningController).Generate-fm (4 handlers)
+[GIN-debug] GET    /alternatives             --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*PlanningController).GetAlternatives-fm (4 handlers)
+[GIN-debug] GET    /profile                  --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*ProfileController).Fetch-fm (5 handlers)
+[GIN-debug] PUT    /profile                  --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*ProfileController).Update-fm (5 handlers)
+[GIN-debug] GET    /task                     --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*TaskController).Fetch-fm (5 handlers)
+[GIN-debug] POST   /task                     --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*TaskController).Create-fm (5 handlers)
+[GIN-debug] POST   /trips                    --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*TripController).Create-fm (5 handlers)
+[GIN-debug] GET    /trips                    --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*TripController).Fetch-fm (5 handlers)
+[GIN-debug] GET    /trips/:id                --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*TripController).GetByID-fm (5 handlers)
+[GIN-debug] DELETE /trips/:id                --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*TripController).Delete-fm (5 handlers)
+[GIN-debug] POST   /favorites                --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*FavoriteController).Create-fm (5 handlers)
+[GIN-debug] GET    /favorites                --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*FavoriteController).Fetch-fm (5 handlers)
+[GIN-debug] DELETE /favorites/:place_id      --> github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller.(*FavoriteController).Delete-fm (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2026/05/23 - 19:43:03 | 204 |       8.516µs |       127.0.0.1 | OPTIONS  "/generate"
+Total places: 250, Filtered places: 78
+Restaurants: 31, Attractions: 47, Sub-types: [alam]
+[GIN] 2026/05/23 - 19:43:04 | 200 |  1.147052605s |       127.0.0.1 | POST     "/generate"
+[GIN] 2026/05/23 - 19:43:27 | 204 |       8.125µs |       127.0.0.1 | OPTIONS  "/generate"
+Total places: 250, Filtered places: 78
+Restaurants: 31, Attractions: 47, Sub-types: [alam]
+[GIN] 2026/05/23 - 19:43:27 | 200 |  165.575434ms |       127.0.0.1 | POST     "/generate"
+[GIN] 2026/05/23 - 19:43:36 | 204 |       10.77µs |       127.0.0.1 | OPTIONS  "/login"
+[GIN] 2026/05/23 - 19:43:36 | 200 |  119.414809ms |       127.0.0.1 | POST     "/login"
+[GIN] 2026/05/23 - 19:43:36 | 204 |       8.225µs |       127.0.0.1 | OPTIONS  "/profile"
+[GIN] 2026/05/23 - 19:43:36 | 200 |     822.961µs |       127.0.0.1 | GET      "/profile"
+[GIN] 2026/05/23 - 19:43:37 | 204 |       7.904µs |       127.0.0.1 | OPTIONS  "/trips"
+[GIN] 2026/05/23 - 19:43:37 | 204 |       4.789µs |       127.0.0.1 | OPTIONS  "/favorites"
+[GIN] 2026/05/23 - 19:43:37 | 200 |     996.924µs |       127.0.0.1 | GET      "/trips"
+[GIN] 2026/05/23 - 19:43:37 | 200 |     8.74227ms |       127.0.0.1 | GET      "/favorites"
+[GIN] 2026/05/23 - 19:43:37 | 200 |    1.132196ms |       127.0.0.1 | GET      "/trips"
+[GIN] 2026/05/23 - 19:43:37 | 200 |    1.514197ms |       127.0.0.1 | GET      "/favorites"
+[GIN] 2026/05/23 - 19:43:39 | 200 |     919.881µs |       127.0.0.1 | GET      "/favorites"
+[GIN] 2026/05/23 - 19:43:39 | 200 |     831.526µs |       127.0.0.1 | GET      "/favorites"
+[GIN] 2026/05/23 - 19:43:40 | 200 |     791.492µs |       127.0.0.1 | GET      "/trips"
+[GIN] 2026/05/23 - 19:43:40 | 200 |     936.101µs |       127.0.0.1 | GET      "/trips"
+[GIN] 2026/05/23 - 19:43:43 | 204 |       8.045µs |       127.0.0.1 | OPTIONS  "/favorites"
+[GIN] 2026/05/23 - 19:43:43 | 200 |     967.019µs |       127.0.0.1 | GET      "/favorites"
+[GIN] 2026/05/23 - 19:43:43 | 200 |      887.02µs |       127.0.0.1 | GET      "/favorites"
+signal: killed
