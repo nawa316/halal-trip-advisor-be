@@ -357,10 +357,15 @@ func (pu *planningUsecase) GenerateRecommendation(c context.Context, req *domain
 			travelTimeBackSeconds := int64((distToStart / 30.0) * 3600)
 			arrivalTime := currentTime + travelTimeBackSeconds
 			
+			returnLocationName := "Kembali ke Lokasi Awal"
+			if req.StartLocationName != "" {
+				returnLocationName = "Kembali ke " + req.StartLocationName
+			}
+
 			itinerary = append(itinerary, domain.ScheduledPlace{
 				Place: domain.Place{
 					ID:        "return-location",
-					Name:      "Kembali ke Lokasi Awal",
+					Name:      returnLocationName,
 					Latitude:  req.StartLat,
 					Longitude: req.StartLong,
 					Type:      "End Point",
@@ -509,10 +514,15 @@ func (pu *planningUsecase) GenerateRecommendation(c context.Context, req *domain
 
 	finalItinerary := generatedItineraries[selectedIndex]
 
+	startLocationName := "Lokasi Awal"
+	if req.StartLocationName != "" {
+		startLocationName = req.StartLocationName
+	}
+
 	startLocationPlace := domain.ScheduledPlace{
 		Place: domain.Place{
 			ID:        "start-location",
-			Name:      "Lokasi Awal",
+			Name:      startLocationName,
 			Latitude:  req.StartLat,
 			Longitude: req.StartLong,
 			Type:      "Starting Point",

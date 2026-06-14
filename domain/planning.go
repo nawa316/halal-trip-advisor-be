@@ -5,14 +5,15 @@ import (
 )
 
 type PlanningRequest struct {
-	StartLat     float64  `json:"start_lat" binding:"required"`
-	StartLong    float64  `json:"start_long" binding:"required"`
-	StartTime    int64    `json:"start_time" binding:"required"` // Unix timestamp
-	EndTime      int64    `json:"end_time" binding:"required"`   // Unix timestamp
-	Preferences  []string `json:"preferences"`                    // e.g., "restaurant", "mosque", "tourism"
-	MaxPlaces     int      `json:"max_places"`
-	Seed          int      `json:"seed"`                           // 0 = optimal, >0 = variations
-	ReturnToStart bool     `json:"return_to_start"`
+	StartLat          float64  `json:"start_lat" binding:"required"`
+	StartLong         float64  `json:"start_long" binding:"required"`
+	StartLocationName string   `json:"start_location_name"`
+	StartTime         int64    `json:"start_time" binding:"required"` // Unix timestamp
+	EndTime           int64    `json:"end_time" binding:"required"`   // Unix timestamp
+	Preferences       []string `json:"preferences"`                    // e.g., "restaurant", "mosque", "tourism"
+	MaxPlaces         int      `json:"max_places"`
+	Seed              int      `json:"seed"`                           // 0 = optimal, >0 = variations
+	ReturnToStart     bool     `json:"return_to_start"`
 }
 
 type ScheduledPlace struct {
